@@ -31,10 +31,12 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		this.cards = new ArrayList<Card>();
 		for(int i = 0; i < ranks.length; i++) {
 			for(int j = 0; j < suits.length; j++) {
 				for(int k = 0; k < values.length; k++) {
-					cards.add(new Card(ranks[i], suits[j], values[k]));
+					Card aCard = new Card(ranks[i], suits[j], values[k]);
+					this.cards.add(aCard);
 					size+=1;
 				}
 			}
@@ -78,6 +80,9 @@ public class Deck {
 	 */
 	public Card deal() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		if(isEmpty()) {
+			return null;
+		}
 		size-= 1;
 		return cards.get(size);
 	}
