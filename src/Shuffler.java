@@ -103,4 +103,24 @@ public class Shuffler {
 		}
 		return "tails";
 	}
+	
+	/** a method that determines if two int arrays of the same length contain the same numbers */
+	public static boolean arePermutations(int[] a, int []b) {
+		
+		if(a.length == b.length) {
+			for(int i = 0; i < a.length; i++) {
+				int same = 0;
+				for(int j = 0; j < b.length; j++) {
+					if(a[i] == b[j]) {
+						same++;
+					}
+				}
+				if(same != 1) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 }
