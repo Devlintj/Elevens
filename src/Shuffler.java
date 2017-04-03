@@ -93,4 +93,14 @@ public class Shuffler {
 			num--;
 		}
 	}
+	
+	/** a method to flip a coin and have it be heads twice as often as tails */
+	public static String coinToss() {
+		Random flip = new Random();
+		int toss = flip.nextInt(3);
+		if(toss < 1) {
+			return "Heads";
+		}
+		return "tails";
+	}
 }
