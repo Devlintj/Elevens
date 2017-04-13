@@ -69,7 +69,7 @@ public class ElevensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		List<Integer> indexes = cardIndexes();
-		List<Integer> selectedCards = new List<Integer>();
+		List<Integer> selectedCards = new ArrayList<Integer>();
 		for(int i = 0; i < indexes.size(); i++) {
 			for(int j = 0; j < indexes.size(); j++) {
 				selectedCards.add(indexes.get(i));
@@ -123,7 +123,7 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		int king, queen, jack = 0;
+		int king = 0, queen = 0, jack = 0;
 		for(int i = 0; i < selectedCards.size(); i++) {
 			if(selectedCards.get(i) == 11) {
 				jack +=1;
