@@ -146,7 +146,7 @@ public class ElevensBoard extends Board {
 	 */
 	public boolean playIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		return playPairSum11IfPossible() || playJQKIfPossible();
 	}
 
 	/**
