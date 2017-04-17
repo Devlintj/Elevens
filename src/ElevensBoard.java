@@ -51,7 +51,7 @@ public class ElevensBoard extends Board {
 		if (selectedCards.size() == 2) {
 			return findPairSum11(selectedCards).length > 0;
 		} else if (selectedCards.size() == 3) {
-			return containsJQK(selectedCards);
+			return findJQK(selectedCards).length > 0;
 		} else {
 			return false;
 		}
@@ -69,7 +69,7 @@ public class ElevensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
 		List<Integer> cIndexes = cardIndexes();
-		return (findPairSum11(cIndexes).length > 0) || containsJQK(cIndexes);
+		return (findPairSum11(cIndexes).length > 0) || (findJQK(cIndexes).length > 0);
 	}
 
 	/**
