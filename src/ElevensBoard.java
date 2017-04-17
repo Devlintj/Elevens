@@ -107,22 +107,37 @@ public class ElevensBoard extends Board {
 	 * @return a list of the indexes of a JQK, if a JQK was found;
 	 *         an empty list, if a JQK was not found.
 	 */
-	private boolean containsJQK(List<Integer> selectedCards) {
+	private int[] findJQK(List<Integer> selectedCards) {
 		/* *** TO BE CHANGED INTO findJQK IN ACTIVITY 11 *** */
 		boolean foundJack = false;
 		boolean foundQueen = false;
 		boolean foundKing = false;
+		int jack = -1;
+		int queen = -1;
+		int king = -1;
+		int[] triple;
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
 				foundJack = true;
+				jack = cardAt(k).pointValue();
 			} else if (cardAt(k).rank().equals("queen")) {
 				foundQueen = true;
+				queen = cardAt(k).pointValue();
 			} else if (cardAt(k).rank().equals("king")) {
 				foundKing = true;
+				king = cardAt(k).pointValue();
 			}
 		}
-		return foundJack && foundQueen && foundKing;
+		if( foundJack && foundQueen && foundKing) {
+			triple = new int[3];
+			triple[0] = jack;
+			triple[1] = queen;
+			triple[2] = king;
+			return triple;
+		}
+		triple = new int[0];
+		return triple;
 	}
 
 	/**
