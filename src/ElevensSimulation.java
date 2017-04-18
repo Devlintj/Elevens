@@ -7,7 +7,7 @@ public class ElevensSimulation {
 	/**
 	 * The number of games of Elevens to play.
 	 */
-	private static final int GAMES_TO_PLAY = 100000000;
+	private static final int GAMES_TO_PLAY = 1000000000;
 
 	/**
 	 * Flag used to control debugging print statements.
@@ -34,6 +34,7 @@ public class ElevensSimulation {
 			if (board.gameIsWon()) {
 				wins++;
 			}
+			System.out.println(k);
 			board.newGame();
 		}
 

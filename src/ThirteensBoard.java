@@ -47,10 +47,10 @@ public class ThirteensBoard extends Board {
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
-		if (selectedCards.size() == 1) {
-			return containsKing(selectedCards);
-		} else if (selectedCards.size() == 2) {
-			return containsPairSum13(selectedCards);
+		if (selectedCards.size() == 2) {
+			return findPairSum13(selectedCards).length > 0;
+		} else if (selectedCards.size() == 3) {
+			return findK(selectedCards).length > 0;
 		} else {
 			return false;
 		}
@@ -67,9 +67,8 @@ public class ThirteensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
 		List<Integer> cIndexes = cardIndexes();
-		return containsPairSum13(cIndexes) || containsKing(cIndexes);
+		return (findPairSum13(cIndexes).length > 0) || (findK(cIndexes).length > 0);
 	}
-
 	/**
 	 * Look for an 13-pair in the selected cards.
 	 * @param selectedCards selects a subset of this board.  It is list
@@ -78,19 +77,25 @@ public class ThirteensBoard extends Board {
 	 * @return a list of the indexes of an 13-pair, if an 13-pair was found;
 	 *         an empty list, if an 13-pair was not found.
 	 */
-	private boolean containsPairSum13(List<Integer> selectedCards) {
-		/* *** TO BE CHANGED INTO findPairSum13 IN ACTIVITY 11 *** */
+	private int[] findPairSum13(List<Integer> selectedCards) {
+		/* *** TO BE CHANGED INTO findPairSum11 IN ACTIVITY 11 *** */
+		int[] pair;
 		for (int sk1 = 0; sk1 < selectedCards.size(); sk1++) {
 			int k1 = selectedCards.get(sk1).intValue();
 			for (int sk2 = sk1 + 1; sk2 < selectedCards.size(); sk2++) {
 				int k2 = selectedCards.get(sk2).intValue();
-				if (cardAt(k1).pointValue() + cardAt(k2).pointValue() == 13) {
-					return true;
+				if (cardAt(k1).pointValue() + cardAt(k2).pointValue() == 11) {
+					pair = new int[2];
+					pair[0] = k1;
+					pair[1] = k2;
+					return pair;
 				}
 			}
 		}
-		return false;
+		pair = new int[0];
+		return pair;
 	}
+
 
 	/**
 	 * Look for a king in the selected cards.
@@ -100,15 +105,25 @@ public class ThirteensBoard extends Board {
 	 * @return a list of the index of a king, if a king was found;
 	 *         an empty list, if a king was not found.
 	 */
-	private boolean containsKing(List<Integer> selectedCards) {
-		/* *** TO BE CHANGED INTO findKing IN ACTIVITY 11 *** */
+	private int[] findK(List<Integer> selectedCards) {
+		/* *** TO BE CHANGED INTO findJQK IN ACTIVITY 11 *** */
+		boolean foundKing = false;
+		int king = -1;
+		int[] single;
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("king")) {
-				return true;
+				foundKing = true;
+				king = k;
 			}
 		}
-		return false;
+		if(foundKing) {
+			single = new int[1];
+			single[0] = king;
+			return single;
+		}
+		single = new int[0];
+		return single;
 	}
 
 	/**
@@ -117,7 +132,7 @@ public class ThirteensBoard extends Board {
 	 */
 	public boolean playIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		return playPairSum13IfPossible() || playKIfPossible();
 	}
 
 	/**
@@ -128,7 +143,15 @@ public class ThirteensBoard extends Board {
 	 */
 	private boolean playPairSum13IfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		List<Integer> cIndexes = cardIndexes();
+		List<Integer> selectedCards = new ArrayList<Integer>();
+		 if(findPairSum13(cIndexes).length > 0) {
+			 selectedCards.add(findPairSum13(cIndexes)[0]);
+			 selectedCards.add(findPairSum13(cIndexes)[1]);
+			 replaceSelectedCards(selectedCards);
+			 return true;
+		 }
+		 return false;
 	}
 
 	/**
@@ -137,8 +160,15 @@ public class ThirteensBoard extends Board {
 	 * The simulation of this game uses this method.
 	 * @return true if a king play was found (and made); false othewise.
 	 */
-	private boolean playKingIfPossible() {
+	private boolean playKIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		List<Integer> cIndexes = cardIndexes();
+		List<Integer> selectedCards = new ArrayList<Integer>();
+		if(findK(cIndexes).length > 0) {
+			selectedCards.add(findK(cIndexes)[0]);
+			replaceSelectedCards(selectedCards);
+			return true;
+		}
+		return false;
 	}
 }
