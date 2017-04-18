@@ -120,13 +120,13 @@ public class ElevensBoard extends Board {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
 				foundJack = true;
-				jack = cardAt(k).pointValue();
+				jack = k;
 			} else if (cardAt(k).rank().equals("queen")) {
 				foundQueen = true;
-				queen = cardAt(k).pointValue();
+				queen = k;
 			} else if (cardAt(k).rank().equals("king")) {
 				foundKing = true;
-				king = cardAt(k).pointValue();
+				king = k;
 			}
 		}
 		if( foundJack && foundQueen && foundKing) {
