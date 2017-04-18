@@ -10,7 +10,7 @@ public class ElevensBoard extends Board {
 	 * The size (number of cards) on the board.
 	 */
 	private static final int BOARD_SIZE = 9;
-
+	
 	/**
 	 * The ranks of the cards for this game to be sent to the deck.
 	 */
@@ -157,7 +157,15 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean playPairSum11IfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		 return false; // REPLACE !
+		List<Integer> cIndexes = cardIndexes();
+		List<Integer> selectedCards = new ArrayList<Integer>();
+		 if(findPairSum11(cIndexes).length > 0) {
+			 selectedCards.add(findPairSum11(cIndexes)[0]);
+			 selectedCards.add(findPairSum11(cIndexes)[1]);
+			 replaceSelectedCards(selectedCards);
+			 return true;
+		 }
+		 return false;
 	}
 
 	/**
@@ -168,6 +176,15 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean playJQKIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		List<Integer> cIndexes = cardIndexes();
+		List<Integer> selectedCards = new ArrayList<Integer>();
+		if(findJQK(cIndexes).length > 0) {
+			selectedCards.add(findJQK(cIndexes)[0]);
+			selectedCards.add(findJQK(cIndexes)[1]);
+			selectedCards.add(findJQK(cIndexes)[2]);
+			replaceSelectedCards(selectedCards);
+			return true;
+		}
+		return false;
 	}
 }
